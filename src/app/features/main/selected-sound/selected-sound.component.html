@@ -1,0 +1,60 @@
+<p *ngIf="!selectedSound" class="choose-text">Choose a song from the list</p>
+<mat-card *ngIf="selectedSound" class="card">
+  <mat-card-content>
+    <div class="card-details">
+      <h4 class="audio-name">Now playing: {{ selectedSound.name }}</h4>
+    </div>
+  </mat-card-content>
+  <div class="divider"></div>
+  <div class="actions-wrapper">
+    <div class="slider-wrapper">
+      <span class="volume-text">Volume:</span>
+      <mat-slider
+        (input)="volumeHandler($event)"
+        class="slider-volume"
+        color="primary"
+        min="0"
+        max="16"
+        step="1"
+      >
+        <input matSliderThumb value="16" />
+      </mat-slider>
+    </div>
+    <div class="buttons">
+      <button mat-icon-button (click)="onPrevHandler()">
+        <mat-icon class="nav-icon">skip_previous</mat-icon>
+      </button>
+      <button
+        #playBtn
+        mat-flat-button
+        color="primary"
+        (click)="onPlayHandler()"
+        class="button-play"
+      >
+        <mat-icon class="play-icon">
+          {{ song && song.paused ? "play_arrow" : "pause" }}
+        </mat-icon>
+      </button>
+      <button mat-icon-button (click)="onNextHandler()">
+        <mat-icon class="nav-icon">skip_next</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="slider-wrapper">
+    <mat-slider
+      (input)="durationHandler($event)"
+      class="slider-duration"
+      color="primary"
+      min="0"
+      max="{{ songDuration }}"
+    >
+      <input
+        matSliderThumb
+        value="{{ song && song.readyState === 0 ? 0 : song?.currentTime }}"
+      />
+    </mat-slider>
+    <span class="duration-text">
+      {{ currentTime }}&nbsp;/&nbsp;{{ changingTime }}
+    </span>
+  </div>
+</mat-card>

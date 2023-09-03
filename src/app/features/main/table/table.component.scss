@@ -1,0 +1,30 @@
+table {
+  width: 100%;
+  margin-top: 2rem;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.row {
+  color: var(--color-primary);
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    background-color: var(--color-background);
+  }
+}
+
+.cell {
+  vertical-align: middle;
+}
+
+.active-row {
+  color: var(--color-background);
+  background-color: var(--color-primary);
+
+  &:hover {
+    background-color: var(--color-primary);
+  }
+}
